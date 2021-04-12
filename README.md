@@ -1,5 +1,6 @@
 # Broken link check action
 
+This is a fork of https://github.com/celinekurpershoek/link-checker that works on ubuntu-20.04 using native node14
 This action uses: https://github.com/stevenvachon/broken-link-checker
 
 Find broken links in your website.
@@ -20,7 +21,7 @@ jobs:
     steps:
     - name: Check for broken links
       id: link-report
-      uses: celinekurpershoek/link-checker@v1.0.1
+      uses: cianyleow/link-checker@master
       with:
         # Required:
         url: 'https://...'
@@ -49,13 +50,3 @@ A comma-separated string of matched URLs to ignore. Check documentation about pa
 type: `Boolean`
 Default value: `false`
 A boolean to do a site-wide check, it will add the `blc` `-ro` param to the command
-
-
-## todo:
-- [ ] Create issue if broken URLs are found
-- [ ] Parse each broken link in report on new line
-
-
-## Test
-There is a broken link in this document as a test:
-[A broken link](http://jhgfdsadfghjklkjhgfdsasdfgh.com)

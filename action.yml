@@ -1,6 +1,6 @@
 name: 'broken-link-check'
 description: 'Find broken links, missing images, etc within your HTML.'
-author: 'Celine Kurpershoek'
+author: 'Cian Leow'
 branding: 
   icon: 'anchor'
   color: 'purple'
@@ -8,7 +8,6 @@ inputs:
   url:  # id of input
     description: 'Url of site'
     required: true
-    default: 'https://github.com/celinekurpershoek/link-checker'
   honorRobotExclusions:
     description: 'Overwrite standard skipping rel=nofollow links'
     required: false
@@ -25,10 +24,12 @@ outputs:
   result: # id of output
     description: 'Report of links'
 runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.url }}
-    - ${{ inputs.honorRobotExclusions }}
-    - ${{ inputs.ignorePatterns }}
-    - ${{ inputs.recursiveLinks }}
+  using: 'composite'
+  steps: 
+    - name: Install blc
+      run: npm install -g broken-link-checker
+      shell: bash
+
+    - name: Run script
+      run: ${{ github.action_path }}/entrypoint.sh ${{ inputs.url }} ${{ inputs.honorRobotExclusions }} ${{ inputs.ignorePatterns }} ${{ inputs.recursiveLinks }}
+      shell: bash
