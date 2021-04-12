@@ -1,6 +1,7 @@
 # Broken link check action
 
 This is a fork of https://github.com/celinekurpershoek/link-checker that works on ubuntu-20.04 using native node14
+
 This action uses: https://github.com/stevenvachon/broken-link-checker
 
 Find broken links in your website.
